@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: placeholder-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: placeholder
+  template:
+    metadata:
+      labels:
+        component: placeholder
+    spec:
+      containers:
+        - name: placeholder
+          image: ronaimate/placeholder
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_HOST
+              value: postgres-cluster-ip-service
+            - name: DB_PORT
+              value: '5432'
+            - name: DB_DATABASE
+              value: postgres
+            - name: DB_USERNAME
+              value: postgres
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: placeholder-secret
+                  key: DB_PASSWORD

@@ -1,0 +1,19 @@
+# todo Run on AWS EKS, GCP, LOCAL... https://kubernetes.github.io/ingress-nginx/deploy/#quick-start
+# todo Read it: https://kubernetes.io/docs/concepts/services-networking/ingress/
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: 'nginx'
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: placeholder-cluster-ip-service
+                port:
+                  number: 8080

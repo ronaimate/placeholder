@@ -1,0 +1,13 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+script:
+  - docker build -t ronaimate/placeholder .
+deploy:
+  provider: script
+  script:
+    docker push ronaimate/placeholder
+  on:
+    branch: master
