@@ -31,3 +31,15 @@ spec:
                 secretKeyRef:
                   name: placeholder-secret
                   key: DB_PASSWORD
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 3
