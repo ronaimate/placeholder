@@ -1,0 +1,607 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "title": "Root Schema",
+  "type": "object",
+  "default": {},
+  "required": [
+    "replicaCount",
+    "image",
+    "imagePullSecrets",
+    "nameOverride",
+    "fullnameOverride",
+    "podAnnotations",
+    "podSecurityContext",
+    "securityContext",
+    "service",
+    "ingress",
+    "resources",
+    "autoscaling",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "postgresql"
+  ],
+  "properties": {
+    "replicaCount": {
+      "title": "The replicaCount Schema",
+      "type": "number",
+      "default": 0,
+      "examples": [
+        2
+      ]
+    },
+    "image": {
+      "title": "The image Schema",
+      "type": "object",
+      "default": {},
+      "required": [
+        "registry",
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "properties": {
+        "registry": {
+          "title": "The registry Schema",
+          "type": "string",
+          "default": "",
+          "examples": [
+            "docker.io"
+          ]
+        },
+        "repository": {
+          "title": "The repository Schema",
+          "type": "string",
+          "default": "",
+          "examples": [
+            "ronaimate/placeholder"
+          ]
+        },
+        "pullPolicy": {
+          "title": "The pullPolicy Schema",
+          "type": "string",
+          "default": "",
+          "examples": [
+            "IfNotPresent"
+          ]
+        },
+        "tag": {
+          "title": "The tag Schema",
+          "type": "string",
+          "default": "",
+          "examples": [
+            "latest"
+          ]
+        }
+      },
+      "examples": [{
+        "registry": "docker.io",
+        "repository": "ronaimate/placeholder",
+        "pullPolicy": "IfNotPresent",
+        "tag": "latest"
+      }]
+    },
+    "imagePullSecrets": {
+      "title": "The imagePullSecrets Schema",
+      "type": "array",
+      "default": [],
+      "items": {},
+      "examples": [
+        []
+      ]
+    },
+    "nameOverride": {
+      "title": "The nameOverride Schema",
+      "type": "string",
+      "default": "",
+      "examples": [
+        ""
+      ]
+    },
+    "fullnameOverride": {
+      "title": "The fullnameOverride Schema",
+      "type": "string",
+      "default": "",
+      "examples": [
+        ""
+      ]
+    },
+    "podAnnotations": {
+      "title": "The podAnnotations Schema",
+      "type": "object",
+      "default": {},
+      "required": [],
+      "properties": {},
+      "examples": [{}]
+    },
+    "podSecurityContext": {
+      "title": "The podSecurityContext Schema",
+      "type": "object",
+      "default": {},
+      "required": [],
+      "properties": {},
+      "examples": [{}]
+    },
+    "securityContext": {
+      "title": "The securityContext Schema",
+      "type": "object",
+      "default": {},
+      "required": [],
+      "properties": {},
+      "examples": [{}]
+    },
+    "service": {
+      "title": "The service Schema",
+      "type": "object",
+      "default": {},
+      "required": [
+        "type",
+        "port"
+      ],
+      "properties": {
+        "type": {
+          "title": "The type Schema",
+          "type": "string",
+          "default": "",
+          "examples": [
+            "ClusterIP"
+          ]
+        },
+        "port": {
+          "title": "The port Schema",
+          "type": "number",
+          "default": 0,
+          "examples": [
+            8080
+          ]
+        }
+      },
+      "examples": [{
+        "type": "ClusterIP",
+        "port": 8080
+      }]
+    },
+    "ingress": {
+      "title": "The ingress Schema",
+      "type": "object",
+      "default": {},
+      "required": [
+        "enabled",
+        "className",
+        "annotations",
+        "hosts",
+        "tls"
+      ],
+      "properties": {
+        "enabled": {
+          "title": "The enabled Schema",
+          "type": "boolean",
+          "default": false,
+          "examples": [
+            true
+          ]
+        },
+        "className": {
+          "title": "The className Schema",
+          "type": "string",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "annotations": {
+          "title": "The annotations Schema",
+          "type": "object",
+          "default": {},
+          "required": [
+            "kubernetes.io/ingress.class"
+          ],
+          "properties": {
+            "kubernetes.io/ingress.class": {
+              "title": "The kubernetes.io/ingress.class Schema",
+              "type": "string",
+              "default": "",
+              "examples": [
+                "nginx"
+              ]
+            }
+          },
+          "examples": [{
+            "kubernetes.io/ingress.class": "nginx"
+          }]
+        },
+        "hosts": {
+          "title": "The hosts Schema",
+          "type": "array",
+          "default": [],
+          "items": {
+            "title": "A Schema",
+            "type": "object",
+            "default": {},
+            "required": [
+              "host",
+              "paths"
+            ],
+            "properties": {
+              "host": {
+                "title": "The host Schema",
+                "type": "string",
+                "default": "",
+                "examples": [
+                  "localhost"
+                ]
+              },
+              "paths": {
+                "title": "The paths Schema",
+                "type": "array",
+                "default": [],
+                "items": {
+                  "title": "A Schema",
+                  "type": "object",
+                  "default": {},
+                  "required": [
+                    "path",
+                    "pathType"
+                  ],
+                  "properties": {
+                    "path": {
+                      "title": "The path Schema",
+                      "type": "string",
+                      "default": "",
+                      "examples": [
+                        "/"
+                      ]
+                    },
+                    "pathType": {
+                      "title": "The pathType Schema",
+                      "type": "string",
+                      "default": "",
+                      "examples": [
+                        "ImplementationSpecific"
+                      ]
+                    }
+                  },
+                  "examples": [{
+                    "path": "/",
+                    "pathType": "ImplementationSpecific"
+                  }]
+                },
+                "examples": [
+                  [{
+                    "path": "/",
+                    "pathType": "ImplementationSpecific"
+                  }]
+                ]
+              }
+            },
+            "examples": [{
+              "host": "localhost",
+              "paths": [{
+                "path": "/",
+                "pathType": "ImplementationSpecific"
+              }]
+            }]
+          },
+          "examples": [
+            [{
+              "host": "localhost",
+              "paths": [{
+                "path": "/",
+                "pathType": "ImplementationSpecific"
+              }]
+            }]
+          ]
+        },
+        "tls": {
+          "title": "The tls Schema",
+          "type": "array",
+          "default": [],
+          "items": {},
+          "examples": [
+            []
+          ]
+        }
+      },
+      "examples": [{
+        "enabled": true,
+        "className": "",
+        "annotations": {
+          "kubernetes.io/ingress.class": "nginx"
+        },
+        "hosts": [{
+          "host": "localhost",
+          "paths": [{
+            "path": "/",
+            "pathType": "ImplementationSpecific"
+          }]
+        }],
+        "tls": []
+      }]
+    },
+    "resources": {
+      "title": "The resources Schema",
+      "type": "object",
+      "default": {},
+      "required": [],
+      "properties": {},
+      "examples": [{}]
+    },
+    "autoscaling": {
+      "title": "The autoscaling Schema",
+      "type": "object",
+      "default": {},
+      "required": [
+        "enabled",
+        "minReplicas",
+        "maxReplicas",
+        "targetCPUUtilizationPercentage"
+      ],
+      "properties": {
+        "enabled": {
+          "title": "The enabled Schema",
+          "type": "boolean",
+          "default": false,
+          "examples": [
+            false
+          ]
+        },
+        "minReplicas": {
+          "title": "The minReplicas Schema",
+          "type": "number",
+          "default": 0,
+          "examples": [
+            1
+          ]
+        },
+        "maxReplicas": {
+          "title": "The maxReplicas Schema",
+          "type": "number",
+          "default": 0,
+          "examples": [
+            100
+          ]
+        },
+        "targetCPUUtilizationPercentage": {
+          "title": "The targetCPUUtilizationPercentage Schema",
+          "type": "number",
+          "default": 0,
+          "examples": [
+            80
+          ]
+        }
+      },
+      "examples": [{
+        "enabled": false,
+        "minReplicas": 1,
+        "maxReplicas": 100,
+        "targetCPUUtilizationPercentage": 80
+      }]
+    },
+    "nodeSelector": {
+      "title": "The nodeSelector Schema",
+      "type": "object",
+      "default": {},
+      "required": [],
+      "properties": {},
+      "examples": [{}]
+    },
+    "tolerations": {
+      "title": "The tolerations Schema",
+      "type": "array",
+      "default": [],
+      "items": {},
+      "examples": [
+        []
+      ]
+    },
+    "affinity": {
+      "title": "The affinity Schema",
+      "type": "object",
+      "default": {},
+      "required": [],
+      "properties": {},
+      "examples": [{}]
+    },
+    "postgresql": {
+      "title": "The postgresql Schema",
+      "type": "object",
+      "default": {},
+      "required": [
+        "auth",
+        "primary",
+        "fullnameOverride"
+      ],
+      "properties": {
+        "auth": {
+          "title": "The auth Schema",
+          "type": "object",
+          "default": {},
+          "required": [
+            "postgresPassword",
+            "username",
+            "password",
+            "database"
+          ],
+          "properties": {
+            "postgresPassword": {
+              "title": "The postgresPassword Schema",
+              "type": "string",
+              "default": "",
+              "examples": [
+                "Pass123"
+              ]
+            },
+            "username": {
+              "title": "The username Schema",
+              "type": "string",
+              "default": "",
+              "examples": [
+                "postgres"
+              ]
+            },
+            "password": {
+              "title": "The password Schema",
+              "type": "string",
+              "default": "",
+              "examples": [
+                "Pass123"
+              ]
+            },
+            "database": {
+              "title": "The database Schema",
+              "type": "string",
+              "default": "",
+              "examples": [
+                "postgres"
+              ]
+            }
+          },
+          "examples": [{
+            "postgresPassword": "Pass123",
+            "username": "postgres",
+            "password": "Pass123",
+            "database": "postgres"
+          }]
+        },
+        "primary": {
+          "title": "The primary Schema",
+          "type": "object",
+          "default": {},
+          "required": [
+            "service"
+          ],
+          "properties": {
+            "service": {
+              "title": "The service Schema",
+              "type": "object",
+              "default": {},
+              "required": [
+                "ports"
+              ],
+              "properties": {
+                "ports": {
+                  "title": "The ports Schema",
+                  "type": "object",
+                  "default": {},
+                  "required": [
+                    "postgresql"
+                  ],
+                  "properties": {
+                    "postgresql": {
+                      "title": "The postgresql Schema",
+                      "type": "string",
+                      "default": "",
+                      "examples": [
+                        "5432"
+                      ]
+                    }
+                  },
+                  "examples": [{
+                    "postgresql": "5432"
+                  }]
+                }
+              },
+              "examples": [{
+                "ports": {
+                  "postgresql": "5432"
+                }
+              }]
+            }
+          },
+          "examples": [{
+            "service": {
+              "ports": {
+                "postgresql": "5432"
+              }
+            }
+          }]
+        },
+        "fullnameOverride": {
+          "title": "The fullnameOverride Schema",
+          "type": "string",
+          "default": "",
+          "examples": [
+            "postgres"
+          ]
+        }
+      },
+      "examples": [{
+        "auth": {
+          "postgresPassword": "Pass123",
+          "username": "postgres",
+          "password": "Pass123",
+          "database": "postgres"
+        },
+        "primary": {
+          "service": {
+            "ports": {
+              "postgresql": "5432"
+            }
+          }
+        },
+        "fullnameOverride": "postgres"
+      }]
+    }
+  },
+  "examples": [{
+    "replicaCount": 2,
+    "image": {
+      "registry": "docker.io",
+      "repository": "ronaimate/placeholder",
+      "pullPolicy": "IfNotPresent",
+      "tag": "latest"
+    },
+    "imagePullSecrets": [],
+    "nameOverride": "",
+    "fullnameOverride": "",
+    "podAnnotations": {},
+    "podSecurityContext": {},
+    "securityContext": {},
+    "service": {
+      "type": "ClusterIP",
+      "port": 8080
+    },
+    "ingress": {
+      "enabled": true,
+      "className": "",
+      "annotations": {
+        "kubernetes.io/ingress.class": "nginx"
+      },
+      "hosts": [{
+        "host": "localhost",
+        "paths": [{
+          "path": "/",
+          "pathType": "ImplementationSpecific"
+        }]
+      }],
+      "tls": []
+    },
+    "resources": {},
+    "autoscaling": {
+      "enabled": false,
+      "minReplicas": 1,
+      "maxReplicas": 100,
+      "targetCPUUtilizationPercentage": 80
+    },
+    "nodeSelector": {},
+    "tolerations": [],
+    "affinity": {},
+    "postgresql": {
+      "auth": {
+        "postgresPassword": "Pass123",
+        "username": "postgres",
+        "password": "Pass123",
+        "database": "postgres"
+      },
+      "primary": {
+        "service": {
+          "ports": {
+            "postgresql": "5432"
+          }
+        }
+      },
+      "fullnameOverride": "postgres"
+    }
+  }]
+}

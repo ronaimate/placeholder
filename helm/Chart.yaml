@@ -1,0 +1,14 @@
+apiVersion: v2
+name: placeholder
+description: A Helm chart for placeholder application
+type: application
+version: 0.1.0
+appVersion: "0.0.1"
+
+dependencies:
+  - name: postgresql
+    version: "12.5.2"
+    repository: "https://charts.bitnami.com/bitnami"
+  - name: nginx-ingress-controller
+    version: "9.6.3"
+    repository: "https://charts.bitnami.com/bitnami"
